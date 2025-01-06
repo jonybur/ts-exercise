@@ -16,19 +16,18 @@ function displayMenu() {
 function handleUserInput(input: string) {
   switch (input) {
     case "1":
-      console.log("Adding a new task...");
+      console.log("Should add a new task");
       break;
     case "2":
-      console.log("Viewing all tasks...");
+      console.log("Should view all tasks");
       break;
     case "3":
-      console.log("Exiting...");
+      console.log("Exits the app");
       rl.close();
       break;
     default:
       console.log("Invalid option. Please choose 1, 2, or 3.");
   }
-  displayMenu();
 }
 
 displayMenu();
