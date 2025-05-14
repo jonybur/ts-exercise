@@ -5,15 +5,22 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-function displayMenu() {
+function questionAsync(query: string): Promise<string> {
+  return new Promise((resolve) => {
+    rl.question(query, resolve);
+  });
+}
+
+async function displayMenu() {
   console.log("\n--- To-Do List App ---");
   console.log("1. Add a new task");
   console.log("2. View all tasks");
   console.log("3. Exit");
-  rl.question("Choose an option: ", handleUserInput);
+  const input = await questionAsync("Choose an option: ");
+  await handleUserInput(input);
 }
 
-function handleUserInput(input: string) {
+async function handleUserInput(input: string) {
   switch (input) {
     case "1":
       console.log("Should add a new task");
@@ -24,10 +31,10 @@ function handleUserInput(input: string) {
     case "3":
       console.log("Exits the app");
       rl.close();
-      break;
+      return;
     default:
       console.log("Invalid option. Please choose 1, 2, or 3.");
   }
 }
 
-displayMenu();
+displayMenu().catch(console.error);
